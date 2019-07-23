@@ -2,6 +2,8 @@ package com.lambdaschool.school.controller;
 
 import com.lambdaschool.school.model.Student;
 import com.lambdaschool.school.service.StudentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController
 {
+    private static final Logger logger = LoggerFactory.getLogger(CourseController.class);
     @Autowired
     private StudentService studentService;
 
@@ -26,6 +29,7 @@ public class StudentController
     @GetMapping(value = "/students", produces = {"application/json"})
     public ResponseEntity<?> listAllStudents()
     {
+        logger.info("/students/students has been accessed");
         List<Student> myStudents = studentService.findAll();
         return new ResponseEntity<>(myStudents, HttpStatus.OK);
     }
@@ -36,6 +40,8 @@ public class StudentController
             @PathVariable
                     Long StudentId)
     {
+
+        logger.info("/students/Student/{StudentId} has been accessed");
         Student r = studentService.findStudentById(StudentId);
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
@@ -46,6 +52,7 @@ public class StudentController
     public ResponseEntity<?> getStudentByNameContaining(
             @PathVariable String name)
     {
+        logger.info("/students/student/namelike/{name} has been accessed");
         List<Student> myStudents = studentService.findStudentByNameLike(name);
         return new ResponseEntity<>(myStudents, HttpStatus.OK);
     }
@@ -58,6 +65,7 @@ public class StudentController
                                            @RequestBody
                                                    Student newStudent) throws URISyntaxException
     {
+        logger.info("/students/Student has been accessed");
         newStudent = studentService.save(newStudent);
 
         // set the location header for the newly created resource
@@ -76,6 +84,7 @@ public class StudentController
             @PathVariable
                     long Studentid)
     {
+        logger.info("/students/Student/{Studentid} has been accessed");
         studentService.update(updateStudent, Studentid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -86,6 +95,7 @@ public class StudentController
             @PathVariable
                     long Studentid)
     {
+        logger.info("/students/Student/{Studentid} has been accessed");
         studentService.delete(Studentid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
