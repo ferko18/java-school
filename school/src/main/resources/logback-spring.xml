@@ -51,12 +51,12 @@
         <appender-ref ref="FILE"/>
     </root>
 
-    <logger name="org.apache.catalina" level="OFF" additivity="false">
+    <logger name="org.apache.catalina" level="INFO" additivity="false">
         <appender-ref ref="TOMCAT"/>
         <appender-ref ref="STDOUT"/>
     </logger>
 
-    <logger name="org.apache.coyote" level="OFF" additivity="false">
+    <logger name="org.apache.coyote" level="INFO" additivity="false">
         <appender-ref ref="TOMCAT"/>
         <appender-ref ref="STDOUT"/>
     </logger>
